@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
+	public int[] location;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,9 +15,20 @@ public class Tile : MonoBehaviour {
 		
 	}
 	void OnMouseDown () {
-		GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-		cylinder.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        cylinder.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+0.6f, gameObject.transform.position.z);
+		if(Input.GetMouseButtonDown(0)){
+			
+			if(Game.getMoney() <= 0.0f)
+				return;
+			
+			GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;
+	        goodGuy.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+0.6f, gameObject.transform.position.z);
+		}
 
+	}
+	public void EnemySpawn(){
+		
+		GameObject enemy = Instantiate(Resources.Load("Enemy")) as GameObject;
+        enemy.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+0.3f, gameObject.transform.position.z);
+		
 	}
 }

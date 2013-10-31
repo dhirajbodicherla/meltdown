@@ -1,46 +1,90 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GoodGuy : MonoBehaviour {
 
-	float attackInterval = 1.5f;
+	float attackInterval = 0.0f;
 	float energy = 100.0f;
+	float energyDrainInterval = 2.5f;
 	float attackTimer;
+	LayerMask layerMask = -1;
+	GameObject myEnemy;
+	List<GameObject> myEnemies = new List<GameObject>();
+	
+	RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
+		//myEnemies = new List<Transform>();
 		Game.buyGoodGuy();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		attackInterval -= Time.deltaTime;
-
-		if(attackInterval <= 0){
-			
-			Shoot();
-			attackInterval = 1.5f;
-			
-		}
 		
-		if(Input.GetMouseButtonDown(1)){
-			Game.killGoodGuy();
-			Destroy(this.gameObject);
+		if(Physics.Raycast (transform.position, Vector3.right, out hit, 100.0f, layerMask)) {
+			
+			if(hit.collider.gameObject.tag == "enemy"){
+				
+				
+				Debug.DrawLine (transform.position, hit.point);
+				
+				attackInterval -= Time.deltaTime;
+
+				if(attackInterval <= 0){
+					Shoot();
+					attackInterval = 0.05f;
+				}
+				
+				
+			}
 		}
+		/*
+		if(Input.GetMouseButtonDown(1)){
+			//Game.killGoodGuy();
+			//Destroy(gameObject);
+			print(gameObject.transform.position.x + " z: " + gameObject.transform.position.y);
+			return;
+		}
+		*/
 	}
 
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "enemy"){
-			energy -= 25.0f;
-
-			if(energy == 0f){
-				Destroy(gameObject);
-			}
+			
+			myEnemy = col.gameObject;
+			myEnemies.Add(myEnemy);
+			
+			DrainEnergy();
 		}
 	}
 	void Shoot(){
+		
 		GameObject bullet = Instantiate(Resources.Load("Bullet")) as GameObject;
-		bullet.transform.position = new Vector3(gameObject.transform.position.x+1.0f, gameObject.transform.position.y-0.4f, gameObject.transform.position.z);
+		bullet.transform.position = new Vector3(gameObject.transform.position.x+1.0f, 
+												0.9f, 
+												gameObject.transform.position.z);
+		
+	}
+	
+	void DrainEnergy(){
+		
+		energy -= 25.0f;
+		
+		if(energy == 0f){
+			myEnemies.ForEach(ResetEnemyMovement);
+			Destroy(gameObject);
+		}else{
+			InvokeRepeating("DrainEnergy", energyDrainInterval, energyDrainInterval);
+		}
+		
+	}
+	
+	void ResetEnemyMovement(GameObject gameObject){
+		
+		if(gameObject)
+			gameObject.SendMessage("MoveAgain");
+		
 	}
 }

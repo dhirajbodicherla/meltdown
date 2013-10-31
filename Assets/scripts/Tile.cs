@@ -14,21 +14,27 @@ public class Tile : MonoBehaviour {
 	void Update () {
 		
 	}
-	void OnMouseDown () {
-		if(Input.GetMouseButtonDown(0)){
-			
-			if(Game.getMoney() <= 0.0f)
-				return;
-			
-			GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;
-	        goodGuy.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+0.6f, gameObject.transform.position.z);
-		}
-
+	void GoodGuySpawn() {
+		
+		if(transform.childCount > 0 )
+			return;
+		
+		if(Game.getMoney() <= 0.0f)
+			return;
+		
+		GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;
+        goodGuy.transform.position = new Vector3(gameObject.transform.position.x, 
+												0.85f, 
+												gameObject.transform.position.z);
+		goodGuy.transform.parent = transform;
+	
 	}
 	public void EnemySpawn(){
 		
 		GameObject enemy = Instantiate(Resources.Load("Enemy")) as GameObject;
-        enemy.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+0.3f, gameObject.transform.position.z);
+        enemy.transform.position = new Vector3(gameObject.transform.position.x, 
+											0.85f, 
+											gameObject.transform.position.z);
 		
 	}
 }

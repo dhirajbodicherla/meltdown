@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Game : MonoBehaviour {
 
-	float enemySpawnInterval = 2.0f;
-	static float totalMoney = 100.0f;
+	float enemySpawnInterval = 4.0f;
+	static float totalMoney = 10000.0f;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,12 +25,11 @@ public class Game : MonoBehaviour {
 	}
 
 	void GenerateEnemy(){
-		GameObject.Find("Tile" + Random.Range(1,8)).SendMessage("EnemySpawn");
+		GameObject.Find("Tile" + Random.Range(1,6)).SendMessage("EnemySpawn");
 	}
 	
 	public static void buyGoodGuy(){
 		totalMoney -= 20.0f;
-		print (totalMoney);
 	}
 	
 	public static void killGoodGuy(){

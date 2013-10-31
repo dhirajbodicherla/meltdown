@@ -15,7 +15,9 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(movementFlag){
-			transform.Translate(Vector3.left * speed * Time.deltaTime);
+			transform.Translate(Vector3.right * speed * Time.deltaTime);
+		}else{
+			//attack();
 		}
 	}
 
@@ -27,7 +29,12 @@ public class Enemy : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}else if(col.gameObject.tag == "goodGuy"){
+			
 			movementFlag = false;
 		}
+	}
+	
+	void MoveAgain(){
+		movementFlag = true;
 	}
 }

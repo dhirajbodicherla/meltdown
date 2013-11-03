@@ -31,7 +31,18 @@ public class Enemy : MonoBehaviour {
 		}else if(col.gameObject.tag == "goodGuy"){
 			
 			movementFlag = false;
+			
+		}else if(col.gameObject.tag == "enemy"){
+			
+			movementFlag = false;
+			
 		}
+	}
+	
+	void OnTriggerExit(Collider col){
+		
+		if(col.gameObject.tag == "enemy")
+			movementFlag = true;
 	}
 	
 	void MoveAgain(){

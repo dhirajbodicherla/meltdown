@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 public class GoodGuy : MonoBehaviour {
 
-	float attackInterval = 0.0f;
+	float attackInterval = 1.5f;
 	float energy = 100.0f;
 	float energyDrainInterval = 2.5f;
 	float attackTimer;
-	LayerMask layerMask = -1;
 	GameObject myEnemy;
 	List<GameObject> myEnemies = new List<GameObject>();
 	
@@ -23,31 +22,21 @@ public class GoodGuy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(Physics.Raycast (transform.position, Vector3.right, out hit, 100.0f, layerMask)) {
-			
+		if(Physics.Raycast (transform.position, Vector3.right, out hit, 100.0f, 1 << 9)) {
 			if(hit.collider.gameObject.tag == "enemy"){
 				
-				
-				Debug.DrawLine (transform.position, hit.point);
+				Debug.DrawLine (transform.position, hit.point, Color.cyan);
 				
 				attackInterval -= Time.deltaTime;
 
 				if(attackInterval <= 0){
+
 					Shoot();
-					attackInterval = 0.05f;
+					attackInterval = 1.5f;
 				}
-				
 				
 			}
 		}
-		/*
-		if(Input.GetMouseButtonDown(1)){
-			//Game.killGoodGuy();
-			//Destroy(gameObject);
-			print(gameObject.transform.position.x + " z: " + gameObject.transform.position.y);
-			return;
-		}
-		*/
 	}
 
 	void OnTriggerEnter(Collider col){
@@ -83,6 +72,8 @@ public class GoodGuy : MonoBehaviour {
 	
 	void ResetEnemyMovement(GameObject gameObject){
 		
+		print("");
+
 		if(gameObject)
 			gameObject.SendMessage("MoveAgain");
 		

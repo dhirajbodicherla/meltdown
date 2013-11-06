@@ -1,3 +1,0 @@
-﻿{
-	enemySpawnInterval : 6.5f
-}

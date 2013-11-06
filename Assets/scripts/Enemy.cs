@@ -37,6 +37,12 @@ public class Enemy : MonoBehaviour {
 			movementFlag = false;
 			
 		}
+		if(col.gameObject.name == "Snowmobile"){
+			
+			//die animation
+			Die();
+			
+		}
 	}
 	
 	void OnTriggerExit(Collider col){
@@ -48,4 +54,9 @@ public class Enemy : MonoBehaviour {
 	void MoveAgain(){
 		movementFlag = true;
 	}
+	
+	void Die(){
+		Destroy(gameObject);
+	}
+	
 }

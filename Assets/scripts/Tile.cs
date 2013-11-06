@@ -28,6 +28,7 @@ public class Tile : MonoBehaviour {
 												0.85f, 
 												gameObject.transform.position.z);
 		goodGuy.transform.parent = transform;
+		goodGuy.name = "GoodGuy";
 	
 	}
 	public void EnemySpawn(int type){
@@ -55,6 +56,7 @@ public class Tile : MonoBehaviour {
         enemy.transform.position = new Vector3(gameObject.transform.position.x, 
 											0.85f, 
 											gameObject.transform.position.z);
+		enemy.name = enemyType;
 		
 	}
 	
@@ -66,6 +68,7 @@ public class Tile : MonoBehaviour {
 											gameObject.transform.position.z+10.0f);
 		
 		snowFlake.transform.parent = transform;
+		snowFlake.name = "Snowflake";
 		
 	}
 }

@@ -3,17 +3,18 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Game.cs">
     <Files>
       <File FileName="Assets/scripts/Tile.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Game.cs" Line="82" Column="3" />
+      <File FileName="Assets/scripts/Game.cs" Line="68" Column="3" />
       <File FileName="Assets/scripts/Bullet.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/GoodGuy.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/Enemy.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/GameGrid.cs" Line="20" Column="9" />
       <File FileName="Assets/scripts/Util.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Levels.cs" Line="12" Column="75" />
+      <File FileName="Assets/scripts/Levels.cs" Line="13" Column="75" />
       <File FileName="Assets/scripts/SnowFlake.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/SnowMobile.cs" Line="6" Column="29" />
-      <File FileName="Assets/scripts/GameStart.cs" Line="15" Column="66" />
-      <File FileName="Assets/scripts/LevelStructure.cs" Line="37" Column="19" />
+      <File FileName="Assets/scripts/GameStart.cs" Line="15" Column="45" />
+      <File FileName="Assets/scripts/LevelStructure.cs" Line="20" Column="14" />
+      <File FileName="Assets/scripts/House.cs" Line="16" Column="12" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

@@ -16,7 +16,7 @@ public class GameGrid : MonoBehaviour {
 	}
 	
 	void OnTriggerExit(Collider col){
-		if(col.gameObject.tag == "bullet")
+		if(col.gameObject.tag == "bullet" || col.gameObject.tag == "goodGuy" || col.gameObject.tag == "badGuy")
 			Destroy(col.gameObject);
 	}
 	

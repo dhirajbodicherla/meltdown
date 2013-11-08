@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public class Game : MonoBehaviour {
 	
 	GameObject[] tiles;
+	static int[] enemies;
 	int tilesCount;
 	static bool gameStart = false;
 	float enemySpawnInterval = 6.0f;
-	static int enemyCount;
+	static int enemyDeadCount;
+	static int enemySpawnCount;
 	static int totalEnemiesForLevel;
 	static float totalMoney;
 	float snowflakeSpawnInterval = 2.0f;
@@ -28,7 +30,7 @@ public class Game : MonoBehaviour {
 		enemySpawnInterval -= Time.deltaTime;
 		snowflakeSpawnInterval -= Time.deltaTime;
 
-		if(enemySpawnInterval <= 0){
+		if(enemySpawnInterval <= 0 && enemySpawnCount != totalEnemiesForLevel){
 			GenerateEnemy();
 			enemySpawnInterval = 6.0f;
 		}
@@ -38,17 +40,16 @@ public class Game : MonoBehaviour {
 			snowflakeSpawnInterval = Random.Range(1.0f,3.0f);
 		}
 		
-		if(totalEnemiesForLevel == enemyCount){
-			print("Done with this level");
-			gameStart = false;
+		if(totalEnemiesForLevel == enemyDeadCount){
+			//gameStart = false;
 			//GameStart.proceedToNextLevel();
 		}
 
 	}
 
 	void GenerateEnemy(){
-		GameObject.Find("Tile" + Random.Range(1,6)).SendMessage("EnemySpawn", Random.Range(1,4));
-		enemyCount++;
+		GameObject.Find("Tile" + Random.Range(1,6)).SendMessage("EnemySpawn", enemies[Random.Range(0, enemies.Length)]);
+		enemySpawnCount++;
 	}
 	
 	void GenerateSnowFlake(){
@@ -70,12 +71,19 @@ public class Game : MonoBehaviour {
 		return totalMoney;
 	}
 	
+	public static void enemyDead(){
+		enemyDeadCount++;
+	}
+	
 	public static void gameBegin(LevelStructure level){
+		
+		print("enemySpawnCount before level loads: " + enemySpawnCount);
 		
 		Application.LoadLevel(level.getLevelName());
 		
 		totalMoney = level.getStartEnergy();
 		totalEnemiesForLevel = level.getNumberOfEnemies();
+		enemies = level.getEnemies();
 		
 		
 		gameStart = true;

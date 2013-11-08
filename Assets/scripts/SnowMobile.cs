@@ -3,7 +3,8 @@ using System.Collections;
 
 public class SnowMobile : MonoBehaviour {
 
-	float snowMobileSpeed = 1.7f;
+	public AudioClip wroom;
+	float snowMobileSpeed = 4f;
 	bool destory = false;
 	
 	// Use this for initialization
@@ -20,6 +21,10 @@ public class SnowMobile : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "enemy"){
 			destory = true;
+			audio.PlayOneShot(wroom);
 		}
+	}
+	void OnMouseDown(){
+		destory = true;
 	}
 }

@@ -1,0 +1,38 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\HUD.cs">
+    <Files>
+      <File FileName="Assets\scripts\House.cs" Line="18" Column="4" />
+      <File FileName="Assets\scripts\GameStart.cs" Line="15" Column="64" />
+      <File FileName="Assets\scripts\GameGrid.cs" Line="24" Column="3" />
+      <File FileName="Assets\scripts\LevelStructure.cs" Line="11" Column="2" />
+      <File FileName="Assets\scripts\Levels.cs" Line="13" Column="44" />
+      <File FileName="Assets\scripts\Game.cs" Line="44" Column="6" />
+      <File FileName="Assets\scripts\Enemy.cs" Line="28" Column="9" />
+      <File FileName="Assets\scripts\Tile.cs" Line="29" Column="8" />
+      <File FileName="Assets\scripts\SnowMobile.cs" Line="24" Column="29" />
+      <File FileName="Assets\scripts\SnowFlake.cs" Line="38" Column="35" />
+      <File FileName="Assets\scripts\HUD.cs" Line="20" Column="3" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="scripts" expanded="True">
+                <Node name="HUD.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

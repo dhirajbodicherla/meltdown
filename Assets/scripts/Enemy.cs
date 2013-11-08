@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
 			energy -= 25.0f;
 
 			if(energy == 0.0f){
-				Destroy(gameObject);
+				Die();
 			}
 		}else if(col.gameObject.tag == "goodGuy"){
 			
@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	void Die(){
+		Game.enemyDead();
 		Destroy(gameObject);
 	}
 	

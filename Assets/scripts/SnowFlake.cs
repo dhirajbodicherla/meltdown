@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SnowFlake : MonoBehaviour {
 	
+	public AudioClip collectSound;
 	float dropSpeed = 0.5f;
 	float snowFlakeDeathTime = 4.0f;
 	
@@ -31,8 +32,15 @@ public class SnowFlake : MonoBehaviour {
 	}
 	
 	void OnMouseDown(){
-		
+		StartCoroutine(SnowflakeCollected());
+	}
+	
+	IEnumerator SnowflakeCollected(){
+		audio.PlayOneShot(collectSound);
 		Game.collectSnowFlake();
+		
+		yield return new WaitForSeconds(collectSound.length);
+		
 		Destroy(gameObject);
 	}
 }

@@ -58,14 +58,12 @@ public class Game : MonoBehaviour {
 	
 	public static void buyGoodGuy(){
 		totalMoney -= 20.0f;
+		updateHUD();
 	}
 	
-	public static void killGoodGuy(){
-		totalMoney += 20.0f;
-	}
 	public static void collectSnowFlake(){
 		totalMoney += 10.0f;
-		print("Total money is : " + totalMoney);
+		updateHUD();
 	}
 	public static float getMoney(){
 		return totalMoney;
@@ -77,16 +75,20 @@ public class Game : MonoBehaviour {
 	
 	public static void gameBegin(LevelStructure level){
 		
-		print("enemySpawnCount before level loads: " + enemySpawnCount);
+		//print("enemySpawnCount before level loads: " + enemySpawnCount);
 		
 		Application.LoadLevel(level.getLevelName());
 		
 		totalMoney = level.getStartEnergy();
 		totalEnemiesForLevel = level.getNumberOfEnemies();
 		enemies = level.getEnemies();
-		
+		updateHUD();
 		
 		gameStart = true;
+	}
+	
+	public static void updateHUD(){
+		HUD.updateSnowFlakeCount(totalMoney);
 	}
 	
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameGrid : MonoBehaviour {
 	
-	
+	private static int actionType = 1; // 1 - spawn good guy, 0 - delete good guy
 		
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,15 @@ public class GameGrid : MonoBehaviour {
 	void OnMouseDown(){
 		
 		Transform tile = Util.getClosestObject("tile", Input.mousePosition, transform);
-		tile.gameObject.SendMessage("GoodGuySpawn");
+		tile.gameObject.SendMessage("GoodGuySpawn", actionType);
 		
+	}
+	
+	public static void setActionType(int type){
+		actionType = type;
+	}
+	
+	public static int getActionType(){
+		return actionType;
 	}
 }

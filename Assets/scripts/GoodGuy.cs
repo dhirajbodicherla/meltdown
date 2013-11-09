@@ -63,7 +63,7 @@ public class GoodGuy : MonoBehaviour {
 		
 		if(energy == 0f){
 			myEnemies.ForEach(ResetEnemyMovement);
-			Destroy(gameObject);
+			kill();
 		}else{
 			InvokeRepeating("DrainEnergy", energyDrainInterval, energyDrainInterval);
 		}
@@ -72,10 +72,22 @@ public class GoodGuy : MonoBehaviour {
 	
 	void ResetEnemyMovement(GameObject gameObject){
 		
-		print("");
+		//print("");
 
 		if(gameObject)
 			gameObject.SendMessage("MoveAgain");
 		
+	}
+	void OnMouseDown(){
+		
+		if(GameGrid.getActionType() == 0)
+			kill();
+		
+		GameGrid.setActionType(1);
+		
+	}
+	
+	void kill(){
+		Destroy(gameObject);
 	}
 }

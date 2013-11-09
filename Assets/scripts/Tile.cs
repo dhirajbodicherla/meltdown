@@ -15,20 +15,35 @@ public class Tile : MonoBehaviour {
 	void Update () {
 		
 	}
-	void GoodGuySpawn() {
+	void GoodGuySpawn(int actionType) {
 		
-		if(transform.childCount > 0 )
-			return;
+		GameGrid.setActionType(1);
 		
-		if(Game.getMoney() <= 0.0f)
-			return;
+		if(actionType == 1){
+			
+			if(transform.childCount > 0 )
+				return;
+			
+			if(Game.getMoney() < 20.0f)
+				return;
+			
+			GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;
+	        goodGuy.transform.position = new Vector3(gameObject.transform.position.x, 
+													0.85f, 
+													gameObject.transform.position.z);
+			goodGuy.transform.parent = transform;
+			goodGuy.name = "GoodGuy";
+			
+		}else{
+			
+			if(transform.childCount < 1 )
+				return;
+			
+			Destroy(transform.GetChild(0).gameObject);
+			
+		}
 		
-		GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;
-        goodGuy.transform.position = new Vector3(gameObject.transform.position.x, 
-												0.85f, 
-												gameObject.transform.position.z);
-		goodGuy.transform.parent = transform;
-		goodGuy.name = "GoodGuy";
+		
 	
 	}
 	public void EnemySpawn(int type){

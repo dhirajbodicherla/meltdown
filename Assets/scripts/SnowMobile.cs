@@ -21,7 +21,7 @@ public class SnowMobile : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "enemy"){
 			destory = true;
-			audio.PlayOneShot(wroom);
+			AudioSource.PlayClipAtPoint(wroom, transform.position);
 		}
 	}
 	void OnMouseDown(){

@@ -31,4 +31,14 @@ public class Util : MonoBehaviour {
         
 		return closest;
 	}
+	
+	public static Vector3 getScreenPoint(Transform t){
+		
+		Camera camera = GameObject.FindGameObjectWithTag("MainCamera").camera;
+		Vector3 screenPos = camera.WorldToScreenPoint(t.position);
+		
+		return screenPos;
+		
+	}
+		
 }

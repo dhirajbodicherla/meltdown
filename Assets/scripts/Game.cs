@@ -13,6 +13,7 @@ public class Game : MonoBehaviour {
 	static int enemySpawnCount;
 	static int totalEnemiesForLevel;
 	static float totalMoney;
+	static string sceneName;
 	float snowflakeSpawnInterval = 2.0f;
 	
 	// Use this for initialization
@@ -41,8 +42,8 @@ public class Game : MonoBehaviour {
 		}
 		
 		if(totalEnemiesForLevel == enemyDeadCount){
-			//gameStart = false;
-			//GameStart.proceedToNextLevel();
+			gameStart = false;
+			GameStart.proceedToNextLevel();
 		}
 
 	}
@@ -77,11 +78,15 @@ public class Game : MonoBehaviour {
 		
 		//print("enemySpawnCount before level loads: " + enemySpawnCount);
 		
-		Application.LoadLevel(level.getLevelName());
+		Application.LoadLevel(level.getSceneName());
 		
 		totalMoney = level.getStartEnergy();
 		totalEnemiesForLevel = level.getNumberOfEnemies();
 		enemies = level.getEnemies();
+		sceneName = level.getSceneName();
+		
+		initHUD();
+		
 		updateHUD();
 		
 		gameStart = true;
@@ -90,5 +95,10 @@ public class Game : MonoBehaviour {
 	public static void updateHUD(){
 		HUD.updateSnowFlakeCount(totalMoney);
 	}
+	
+	public static void initHUD(){
+		HUD.initGameHUD();
+	}
+	
 	
 }

@@ -3,38 +3,43 @@ using System.Collections;
 
 public struct LevelStructure {
 	
-	private string scene;
-	private int[] enemies;
-	private int[] goodGuys;
-	private int numberOfEnemies;
-	private int startEnergy;
+	private string _scene;
+	private int[] _enemies;
+	private int[] _goodGuys;
+	private int _numberOfEnemies;
+	private int _startEnergy;
+	private string _levelName;
 	
-	public LevelStructure(string sc, int[] en, int[] gg, int noe, int se){
-		scene = sc;
-		enemies = en;
-		goodGuys = gg;
-		numberOfEnemies = noe;
-		startEnergy = se;
+	public LevelStructure(string scene, int[] enemies, int[] goodGuys, int numberOfEnemies, int startEnergy, string levelName){
+		_scene = scene;
+		_enemies = enemies;
+		_goodGuys = goodGuys;
+		_numberOfEnemies = numberOfEnemies;
+		_startEnergy = startEnergy;
+		_levelName = levelName;
 	}
 	
 	public int getStartEnergy(){
-		return startEnergy;
+		return _startEnergy;
 	}
 	
-	public string getLevelName(){
-		return scene;
+	public string getSceneName(){
+		return _scene;
 	}
 	
 	public int getNumberOfEnemies(){
-		return numberOfEnemies;
+		return _numberOfEnemies;
 	}
 	
 	public int[] getEnemies(){
-		return enemies;
+		return _enemies;
 	}
 	
 	public int[] getGoodGuys(){
-		return goodGuys;
+		return _goodGuys;
+	}
+	public string getLevelName(){
+		return _levelName;
 	}
 
 }

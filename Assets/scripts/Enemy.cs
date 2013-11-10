@@ -29,8 +29,8 @@ public class Enemy : MonoBehaviour {
 				Die();
 			}
 		}else if(col.gameObject.tag == "goodGuy"){
-			
 			movementFlag = false;
+			attack(col.transform);
 			
 		}else if(col.gameObject.tag == "enemy"){
 			
@@ -58,6 +58,10 @@ public class Enemy : MonoBehaviour {
 	void Die(){
 		Game.enemyDead();
 		Destroy(gameObject);
+	}
+	
+	void attack(Transform goodGuy){
+		//goodGuy.SendMessage("DrainEnergy");
 	}
 	
 }

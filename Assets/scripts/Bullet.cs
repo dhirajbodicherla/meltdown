@@ -4,6 +4,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
 	float speed = 1.3f;
+	public AudioClip snowballHitSound;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class Bullet : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "enemy"){
+			AudioSource.PlayClipAtPoint(snowballHitSound, transform.position);
 			Destroy(gameObject);
 		}
 	}

@@ -32,15 +32,8 @@ public class SnowFlake : MonoBehaviour {
 	}
 	
 	void OnMouseDown(){
-		StartCoroutine(SnowflakeCollected());
-	}
-	
-	IEnumerator SnowflakeCollected(){
-		audio.PlayOneShot(collectSound);
 		Game.collectSnowFlake();
-		
-		yield return new WaitForSeconds(collectSound.length);
-		
+		AudioSource.PlayClipAtPoint(collectSound, transform.position);
 		Destroy(gameObject);
 	}
 }

@@ -1,13 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Enemy.cs">
+    <Files>
+      <File FileName="Assets/scripts/Tile.cs" Line="29" Column="4" />
+      <File FileName="Assets/scripts/Game.cs" Line="16" Column="1" />
+      <File FileName="Assets/scripts/Bullet.cs" Line="21" Column="70" />
+      <File FileName="Assets/scripts/GoodGuy.cs" Line="60" Column="18" />
+      <File FileName="Assets/scripts/Enemy.cs" Line="33" Column="24" />
+      <File FileName="Assets/scripts/GameGrid.cs" Line="26" Column="28" />
+      <File FileName="Assets/scripts/Util.cs" Line="40" Column="20" />
+      <File FileName="Assets/scripts/Levels.cs" Line="16" Column="90" />
+      <File FileName="Assets/scripts/SnowFlake.cs" Line="34" Column="21" />
+      <File FileName="Assets/scripts/SnowMobile.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/GameStart.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/LevelStructure.cs" Line="35" Column="19" />
+      <File FileName="Assets/scripts/House.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/HUD.cs" Line="40" Column="18" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="scripts" expanded="True">
-                <Node name="HUD.cs" selected="True" />
+                <Node name="Enemy.cs" selected="True" />
               </Node>
             </Node>
           </Node>

@@ -5,7 +5,7 @@ public class HUD : MonoBehaviour {
 
 	public GUISkin skin;
 	
-	static int HUDType = 0; // 1 - top and left, 2- something else
+	static int HUDType = 1; // 1 - top and left, 2- something else
 	
 	private static float snowFlakesCount;
 	public float barDisplay = 0.5f;
@@ -75,8 +75,9 @@ public class HUD : MonoBehaviour {
 				GUI.BeginGroup (progressBarContainer, "");
 			        GUI.Box (new Rect (0, 0, 250, 35), "");
 			        // draw the filled-in part:
-			        GUI.BeginGroup (new Rect (0, 0, 250 * barDisplay, 35));
-			            GUI.Box (new Rect (0, 0, 250, 35), progressBarFull);
+			        GUI.BeginGroup (new Rect (0, 0, 250, 35));
+			            GUI.Box (new Rect (250, 0, -barDisplay * 2.5f, 35),""); 
+						GUI.DrawTexture(new Rect(-barDisplay,0,48,48), snowFlakeImage);
 			        GUI.EndGroup ();
 			    GUI.EndGroup ();
 				

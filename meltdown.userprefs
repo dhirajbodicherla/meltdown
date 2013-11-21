@@ -3,9 +3,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/HUD.cs">
     <Files>
       <File FileName="../Dropbox/CGT511-4D/test-cgt-511/Assets/scripts/Character.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Tile.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Game.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/Bullet.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Tile.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Game.cs" Line="104" Column="41" />
       <File FileName="Assets/scripts/GoodGuy.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/Enemy.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/GameGrid.cs" Line="1" Column="1" />
@@ -16,7 +16,7 @@
       <File FileName="Assets/scripts/GameStart.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/LevelStructure.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/House.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/HUD.cs" Line="79" Column="68" />
+      <File FileName="Assets/scripts/HUD.cs" Line="102" Column="55" />
       <File FileName="Assets/scripts/AnimateTexture.cs" Line="1" Column="1" />
     </Files>
     <Pads>

@@ -51,6 +51,7 @@ public class Game : MonoBehaviour {
 	void GenerateEnemy(){
 		GameObject.Find("Tile" + Random.Range(1,6)).SendMessage("EnemySpawn", enemies[Random.Range(0, enemies.Length)]);
 		enemySpawnCount++;
+		updateProgressBar();
 	}
 	
 	void GenerateSnowFlake(){
@@ -100,5 +101,7 @@ public class Game : MonoBehaviour {
 		HUD.initGameHUD();
 	}
 	
-	
+	public static void updateProgressBar(){
+		HUD.updateProgressBar(totalEnemiesForLevel, enemySpawnCount);
+	}
 }

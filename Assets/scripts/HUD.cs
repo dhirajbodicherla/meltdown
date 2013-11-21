@@ -8,29 +8,35 @@ public class HUD : MonoBehaviour {
 	static int HUDType = 1; // 1 - top and left, 2- something else
 	
 	private static float snowFlakesCount;
-	public float barDisplay = 0.5f;
+	public static float progress = 0.5f;
+	private bool gameIsPaused = false;
+	
+	/*
+	 * Textures
+	 */ 
 	
 	public Texture snowFlakeImage;
+	public Texture sunImage;
 	public Texture2D progressBarEmpty;
 	public Texture2D progressBarFull;
+	public Texture2D pauseImage;
 	
-	public Rect topContainer = new Rect(-10, -10, 640, 60);
+	/*
+	 * Containers
+	 */ 
 	
+	Rect topContainer = new Rect(-10, -10, 640, 60);
 	Rect snowContainer = new Rect (10, 20, 120, 40);
 	Rect shovelContainer = new Rect (138, 20, 90, 40);
-	Rect progressBarContainer = new Rect (250, 25, 250, 40);
+	static Rect progressBarContainer = new Rect (250, 25, 250, 50);
 	Rect menuButtonContainer = new Rect (540, 20, 90, 40);
 	
-	//public Rect snowFlakeGUINormalizedArea;
-	
-	// Use this for initialization
 	void Start () {
 		
 		//GUI.skin = skin;
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}
@@ -39,11 +45,15 @@ public class HUD : MonoBehaviour {
 		
 		if(HUDType == 1){
 		
-			float xx = Util.getScreenPoint(GameObject.Find("reference").transform).x;
+			//Vector3 xx = Util.getScreenPoint(GameObject.Find("reference").transform);
 			
-			topContainer.Set(xx, -10, 640, 60);
+			topContainer.Set(0, 0, 640, 70);
 			
 			GUI.skin = skin;
+			
+			float yScale = 0.9f;
+			
+			GUI.matrix = Matrix4x4.TRS(new Vector3(50,0,0),Quaternion.identity,new Vector3(yScale, yScale, 1f));
 			
 			GUI.BeginGroup(topContainer, "");
 			
@@ -71,34 +81,60 @@ public class HUD : MonoBehaviour {
 				/*
 				 * Progress bar
 				 */
-		
+			
 				GUI.BeginGroup (progressBarContainer, "");
 			        GUI.Box (new Rect (0, 0, 250, 35), "");
 			        // draw the filled-in part:
-			        GUI.BeginGroup (new Rect (0, 0, 250, 35));
-			            GUI.Box (new Rect (250, 0, -barDisplay * 2.5f, 35),""); 
-						GUI.DrawTexture(new Rect(-barDisplay,0,48,48), snowFlakeImage);
-			        GUI.EndGroup ();
+					GUI.BeginGroup (new Rect (220f-progress, 0f, 260, 45));
+						GUI.Box (new Rect (25f, 0, 290, 35),"");
+						GUI.DrawTexture(new Rect(-5f,-5, 48, 48), sunImage);
+					GUI.EndGroup();
+						
 			    GUI.EndGroup ();
+				//GUI.DrawTexture(new Rect(progressBarContainer.x + 230f - progress,progressBarContainer.y-5f, 48, 48), sunImage);
+			
 				
 				/*
 				 * Menu button
 				 */
 				GUI.BeginGroup(menuButtonContainer, "");
 					GUI.Box (new Rect(5, 5, 85, 35), "");
-					if(GUI.Button(new Rect(15, 8, 60, 28), "Menu")){
-						Application.LoadLevel(0);
+					if(GUI.Button(new Rect(15, 8, 60, 28), pauseImage)){
+						if(Time.timeScale == 1.0f){
+							Time.timeScale = 0f;
+							gameIsPaused = true;
+						}else{
+							Time.timeScale = 1.0f;
+							gameIsPaused = false;
+						}
 					}
 				GUI.EndGroup();
 			
 			GUI.EndGroup();
+			
 		}
 		
 	}
+	
 	public static void updateSnowFlakeCount(float flakesCount){
 		snowFlakesCount = flakesCount;
 	}
+	
 	public static void initGameHUD(){
 		HUDType = 1;
+		progress = 0;
 	}
+	
+	public static void updateProgressBar(float enemiesTotal, float enemiesCurrent){
+		
+		progress = ( progressBarContainer.x * enemiesCurrent ) / enemiesTotal;
+		//progress += 1f;
+		//StartCoroutine(progressBarTransition());
+		
+	}
+	/*
+	static IEnumerator progressBarTransition(){
+		
+	}
+	*/
 }

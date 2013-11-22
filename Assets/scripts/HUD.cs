@@ -7,9 +7,9 @@ public class HUD : MonoBehaviour {
 	
 	static int HUDType = 1; // 1 - top and left, 2- something else
 	
-	private static float snowFlakesCount;
-	public static float progress = 0.5f;
-	private bool gameIsPaused = false;
+	private float snowFlakesCount;
+	public float progress = 0.5f;
+	bool gameIsPaused = false;
 	
 	/*
 	 * Textures
@@ -32,13 +32,7 @@ public class HUD : MonoBehaviour {
 	Rect menuButtonContainer = new Rect (540, 20, 90, 40);
 	
 	void Start () {
-		
 		//GUI.skin = skin;
-		
-	}
-	
-	void Update () {
-	
 	}
 	
 	void OnGUI(){
@@ -116,25 +110,37 @@ public class HUD : MonoBehaviour {
 		
 	}
 	
-	public static void updateSnowFlakeCount(float flakesCount){
+	public void updateSnowFlakeCount(float flakesCount){
 		snowFlakesCount = flakesCount;
 	}
 	
-	public static void initGameHUD(){
+	public void initGameHUD(){
 		HUDType = 1;
 		progress = 0;
 	}
 	
-	public static void updateProgressBar(float enemiesTotal, float enemiesCurrent){
+	void updateProgressBar(float[] gameProgress){
 		
-		progress = ( progressBarContainer.x * enemiesCurrent ) / enemiesTotal;
+		
+		float finalProgress = ( progressBarContainer.x * gameProgress[1] ) / gameProgress[0];
+		/*
+		while(progress <= finalProgress){
+			
+			progress += 1.0f * Time.deltaTime;
+			print(progress);
+			//WaitForSeconds(0.05f);
+			
+		}
 		//progress += 1f;
+		*/
+		//print(Time.deltaTime);
 		//StartCoroutine(progressBarTransition());
 		
 	}
 	/*
-	static IEnumerator progressBarTransition(){
+	public IEnumerator progressBarTransition(){
 		
 	}
 	*/
+	
 }

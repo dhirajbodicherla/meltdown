@@ -6,10 +6,11 @@ public class Enemy : MonoBehaviour {
 	float speed = 0.5f;
 	float energy = 100.0f;
 	bool movementFlag = true;
+	GameObject _base;
 
 	// Use this for initialization
 	void Start () {
-	
+		_base = GameObject.FindGameObjectWithTag("base");
 	}
 	
 	// Update is called once per frame
@@ -56,7 +57,9 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	void Die(){
-		Game.enemyDead();
+		_base.SendMessage("enemyDead");
+		//Game.enemyDead();
+		
 		Destroy(gameObject);
 	}
 	

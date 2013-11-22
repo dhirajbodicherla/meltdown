@@ -5,21 +5,25 @@ using System.Collections.Generic;
 public class Game : MonoBehaviour {
 	
 	GameObject[] tiles;
-	static int[] enemies;
+	int[] enemies;
 	int tilesCount;
-	static bool gameStart = false;
+	bool gameStart = false;
 	float enemySpawnInterval = 6.0f;
-	static int enemyDeadCount;
-	static int enemySpawnCount;
-	static int totalEnemiesForLevel;
-	static float totalMoney;
-	static string sceneName;
+	int enemyDeadCount;
+	int enemySpawnCount;
+	int totalEnemiesForLevel;
+	public static float totalMoney;
+	//string sceneName;
 	float snowflakeSpawnInterval = 2.0f;
+	private HUD hud;
+	LevelStructure level;
 	
 	// Use this for initialization
 	void Start () {
 		tiles= GameObject.FindGameObjectsWithTag("tile");
 		tilesCount = tiles.Length;
+		hud = transform.GetComponentInChildren<HUD>();
+		gameBegin();
 	}
 	
 	// Update is called once per frame
@@ -43,7 +47,7 @@ public class Game : MonoBehaviour {
 		
 		if(totalEnemiesForLevel == enemyDeadCount){
 			gameStart = false;
-			GameStart.proceedToNextLevel();
+			//GameStart.proceedToNextLevel();
 		}
 
 	}
@@ -58,33 +62,34 @@ public class Game : MonoBehaviour {
 		tiles[Random.Range(1,tilesCount)].SendMessage("SnowFlakeSpawn");
 	}
 	
-	public static void buyGoodGuy(){
+	public void buyGoodGuy(){
 		totalMoney -= 20.0f;
 		updateHUD();
 	}
 	
-	public static void collectSnowFlake(){
+	public void collectSnowFlake(){
 		totalMoney += 10.0f;
 		updateHUD();
 	}
-	public static float getMoney(){
+	public float getMoney(){
 		return totalMoney;
 	}
 	
-	public static void enemyDead(){
+	void enemyDead(){
 		enemyDeadCount++;
 	}
 	
-	public static void gameBegin(LevelStructure level){
+	void gameBegin(){
 		
 		//print("enemySpawnCount before level loads: " + enemySpawnCount);
+		level = Levels.levels[PlayerPrefs.GetInt("currentLevel")];
 		
-		Application.LoadLevel(level.getSceneName());
+		//Application.LoadLevel(level.getSceneName());
 		
 		totalMoney = level.getStartEnergy();
 		totalEnemiesForLevel = level.getNumberOfEnemies();
 		enemies = level.getEnemies();
-		sceneName = level.getSceneName();
+		//sceneName = level.getSceneName();
 		
 		initHUD();
 		
@@ -93,15 +98,21 @@ public class Game : MonoBehaviour {
 		gameStart = true;
 	}
 	
-	public static void updateHUD(){
-		HUD.updateSnowFlakeCount(totalMoney);
+	void updateHUD(){
+		hud.SendMessage("updateSnowFlakeCount", totalMoney);
 	}
 	
-	public static void initHUD(){
-		HUD.initGameHUD();
+	void initHUD(){
+		//HUD.initGameHUD();
+		hud.SendMessage("initGameHUD");
+		
 	}
 	
-	public static void updateProgressBar(){
-		HUD.updateProgressBar(totalEnemiesForLevel, enemySpawnCount);
+	void updateProgressBar(){
+		//HUD.updateProgressBar(totalEnemiesForLevel, enemySpawnCount);
+		
+		//float[] progress = new float[]{totalEnemiesForLevel, enemySpawnCount};
+		
+		//hud.SendMessage("updateProgressBar", progress);
 	}
 }

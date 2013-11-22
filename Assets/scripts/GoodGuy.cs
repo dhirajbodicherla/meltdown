@@ -10,13 +10,15 @@ public class GoodGuy : MonoBehaviour {
 	float attackTimer;
 	GameObject myEnemy;
 	List<GameObject> myEnemies = new List<GameObject>();
+	GameObject _base;
 	
 	RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
 		//myEnemies = new List<Transform>();
-		Game.buyGoodGuy();
+		_base = GameObject.FindGameObjectWithTag("base");
+		_base.SendMessage("buyGoodGuy");
 	}
 	
 	// Update is called once per frame

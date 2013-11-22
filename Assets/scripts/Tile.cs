@@ -5,10 +5,11 @@ public class Tile : MonoBehaviour {
 
 	public int[] location;
 	string enemyType;
-
+	//GameObject _base;
+	
 	// Use this for initialization
 	void Start () {
-	
+		//_base = GameObject.FindGameObjectWithTag("base");
 	}
 	
 	// Update is called once per frame
@@ -24,7 +25,7 @@ public class Tile : MonoBehaviour {
 			if(transform.childCount > 0 )
 				return;
 			
-			if(Game.getMoney() < 20.0f)
+			if(Game.totalMoney < 20.0f)
 				return;
 			
 			GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;

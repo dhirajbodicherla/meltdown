@@ -6,10 +6,11 @@ public class SnowFlake : MonoBehaviour {
 	public AudioClip collectSound;
 	float dropSpeed = 0.5f;
 	float snowFlakeDeathTime = 4.0f;
+	GameObject _base;
 	
 	// Use this for initialization
 	void Start () {
-	
+		_base = GameObject.FindGameObjectWithTag("base");
 	}
 	
 	// Update is called once per frame
@@ -32,7 +33,7 @@ public class SnowFlake : MonoBehaviour {
 	}
 	
 	void OnMouseDown(){
-		Game.collectSnowFlake();
+		_base.SendMessage("collectSnowFlake");
 		AudioSource.PlayClipAtPoint(collectSound, transform.position);
 		Destroy(gameObject);
 	}

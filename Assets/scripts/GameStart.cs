@@ -3,11 +3,17 @@ using System.Collections;
 
 public class GameStart : MonoBehaviour {
 
-	public static int currentLevel = 0;
+	private int currentLevel = 0;
 	
 	// Use this for initialization
 	void Start () {
 		// fetch local storage
+		if(PlayerPrefs.HasKey("currentLevel")){
+			currentLevel = PlayerPrefs.GetInt("currentLevel");
+		}else{
+			currentLevel = 0;
+			PlayerPrefs.SetInt("currentLevel", currentLevel);
+		}
 	}
 	
 	// Update is called once per frame
@@ -16,12 +22,12 @@ public class GameStart : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider col){
-		Game.gameBegin(Levels.levels[currentLevel]);
+		Application.LoadLevel(currentLevel);
 	}
 	
-	public static void proceedToNextLevel(){
+	public void proceedToNextLevel(){
 		currentLevel++;
-		Game.gameBegin(Levels.levels[currentLevel]);
+		//Game.gameBegin(Levels.levels[currentLevel]);
 	}
 	
 	public static void gameEnd(){

@@ -15,7 +15,7 @@ public class House : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "enemy"){
-			GameStart.gameEnd();
+			//En.gameEnd();
 		}
 	}
 }

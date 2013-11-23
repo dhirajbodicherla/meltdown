@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class GoodGuy : MonoBehaviour {
 
 	float attackInterval = 1.5f;
-	float energy = 100.0f;
-	float energyDrainInterval = 2.5f;
+	float energy = 4.0f;
+	float energyDrainInterval = 1f;
 	float attackTimer;
 	GameObject myEnemy;
 	List<GameObject> myEnemies = new List<GameObject>();
@@ -61,7 +61,7 @@ public class GoodGuy : MonoBehaviour {
 	
 	void DrainEnergy(){
 		
-		energy -= 25.0f;
+		energy -= 1.0f;
 		
 		if(energy == 0f){
 			myEnemies.ForEach(ResetEnemyMovement);
@@ -73,8 +73,6 @@ public class GoodGuy : MonoBehaviour {
 	}
 	
 	void ResetEnemyMovement(GameObject gameObject){
-		
-		//print("");
 
 		if(gameObject)
 			gameObject.SendMessage("MoveAgain");

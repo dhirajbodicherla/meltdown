@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-	float speed = 0.5f;
-	float energy = 100.0f;
+	float speed = 0.1f;
+	float energy = 96.0f;
 	bool movementFlag = true;
 	GameObject _base;
 
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "bullet"){
-			energy -= 25.0f;
+			energy -= 8.0f;
 
 			if(energy == 0.0f){
 				Die();

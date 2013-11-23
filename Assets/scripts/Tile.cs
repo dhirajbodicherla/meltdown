@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour {
 			if(transform.childCount > 0 )
 				return;
 			
-			if(Game.totalMoney < 20.0f)
+			if(Game.totalMoney < 100.0f)
 				return;
 			
 			GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;

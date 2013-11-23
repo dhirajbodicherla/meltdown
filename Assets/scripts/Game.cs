@@ -8,14 +8,15 @@ public class Game : MonoBehaviour {
 	int[] enemies;
 	int tilesCount;
 	bool gameStart = false;
-	float enemySpawnInterval = 6.0f;
+	float enemySpawnInterval = 20.0f;
 	int enemyDeadCount;
 	int enemySpawnCount;
 	int totalEnemiesForLevel;
 	public static float totalMoney;
 	//string sceneName;
-	float snowflakeSpawnInterval = 2.0f;
+	float snowflakeSpawnInterval = 7.0f;
 	private HUD hud;
+	private Engine engine;
 	LevelStructure level;
 	
 	// Use this for initialization
@@ -23,6 +24,7 @@ public class Game : MonoBehaviour {
 		tiles= GameObject.FindGameObjectsWithTag("tile");
 		tilesCount = tiles.Length;
 		hud = transform.GetComponentInChildren<HUD>();
+		engine = transform.GetComponentInChildren<Engine>();
 		gameBegin();
 	}
 	
@@ -37,17 +39,17 @@ public class Game : MonoBehaviour {
 
 		if(enemySpawnInterval <= 0 && enemySpawnCount != totalEnemiesForLevel){
 			GenerateEnemy();
-			enemySpawnInterval = 6.0f;
+			enemySpawnInterval = 20.0f;
 		}
 		
 		if(snowflakeSpawnInterval <= 0){
 			GenerateSnowFlake();
-			snowflakeSpawnInterval = Random.Range(1.0f,3.0f);
+			snowflakeSpawnInterval = Random.Range(6.0f, 8.0f);
 		}
 		
 		if(totalEnemiesForLevel == enemyDeadCount){
 			gameStart = false;
-			//GameStart.proceedToNextLevel();
+			engine.SendMessage("proceedToNextLevel");
 		}
 
 	}
@@ -55,7 +57,7 @@ public class Game : MonoBehaviour {
 	void GenerateEnemy(){
 		GameObject.Find("Tile" + Random.Range(1,6)).SendMessage("EnemySpawn", enemies[Random.Range(0, enemies.Length)]);
 		enemySpawnCount++;
-		updateProgressBar();
+		updateProgress();
 	}
 	
 	void GenerateSnowFlake(){
@@ -63,12 +65,12 @@ public class Game : MonoBehaviour {
 	}
 	
 	public void buyGoodGuy(){
-		totalMoney -= 20.0f;
+		totalMoney -= 100.0f;
 		updateHUD();
 	}
 	
 	public void collectSnowFlake(){
-		totalMoney += 10.0f;
+		totalMoney += 25.0f;
 		updateHUD();
 	}
 	public float getMoney(){
@@ -108,11 +110,9 @@ public class Game : MonoBehaviour {
 		
 	}
 	
-	void updateProgressBar(){
-		//HUD.updateProgressBar(totalEnemiesForLevel, enemySpawnCount);
+	void updateProgress(){
 		
-		//float[] progress = new float[]{totalEnemiesForLevel, enemySpawnCount};
+		hud.SendMessage("updateProgressBar", new float[]{totalEnemiesForLevel, enemySpawnCount});
 		
-		//hud.SendMessage("updateProgressBar", progress);
 	}
 }

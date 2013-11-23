@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	float speed = 1.3f;
+	float speed = 6.0f;
 	public AudioClip snowballHitSound;
 
 	// Use this for initialization

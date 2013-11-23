@@ -10,6 +10,8 @@ public class HUD : MonoBehaviour {
 	private float snowFlakesCount;
 	public float progress = 0.5f;
 	bool gameIsPaused = false;
+	bool progressBarUpdateLock = false;
+	float finalProgress;
 	
 	/*
 	 * Textures
@@ -79,8 +81,8 @@ public class HUD : MonoBehaviour {
 				GUI.BeginGroup (progressBarContainer, "");
 			        GUI.Box (new Rect (0, 0, 250, 35), "");
 			        // draw the filled-in part:
-					GUI.BeginGroup (new Rect (220f-progress, 0f, 260, 45));
-						GUI.Box (new Rect (25f, 0, 290, 35),"");
+					GUI.BeginGroup (new Rect (220f-progress, 0f, 280, 45));
+						GUI.Box (new Rect (25f, 0, 370, 35),"");
 						GUI.DrawTexture(new Rect(-5f,-5, 48, 48), sunImage);
 					GUI.EndGroup();
 						
@@ -108,39 +110,31 @@ public class HUD : MonoBehaviour {
 			
 		}
 		
+		if(progressBarUpdateLock){
+			
+			if(progress < finalProgress){
+				progress += 10.0f * Time.deltaTime;
+			}else{
+				progressBarUpdateLock = false;
+			}
+		}
+		
 	}
 	
-	public void updateSnowFlakeCount(float flakesCount){
+	void updateSnowFlakeCount(float flakesCount){
 		snowFlakesCount = flakesCount;
 	}
 	
-	public void initGameHUD(){
+	void initGameHUD(){
 		HUDType = 1;
 		progress = 0;
 	}
 	
 	void updateProgressBar(float[] gameProgress){
 		
-		
-		float finalProgress = ( progressBarContainer.x * gameProgress[1] ) / gameProgress[0];
-		/*
-		while(progress <= finalProgress){
-			
-			progress += 1.0f * Time.deltaTime;
-			print(progress);
-			//WaitForSeconds(0.05f);
-			
-		}
-		//progress += 1f;
-		*/
-		//print(Time.deltaTime);
-		//StartCoroutine(progressBarTransition());
+		finalProgress = ( progressBarContainer.x * gameProgress[1] ) / gameProgress[0];
+		progressBarUpdateLock = true;
 		
 	}
-	/*
-	public IEnumerator progressBarTransition(){
-		
-	}
-	*/
 	
 }

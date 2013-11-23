@@ -3,7 +3,7 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="../Dropbox/CGT511-4D/test-cgt-511/Assets/scripts/Character.cs">
     <Files>
       <File FileName="../bodicherla_dhiraj_Mechanics1/Assets/scripts/Character.cs" Line="1" Column="1" />
-      <File FileName="../Dropbox/CGT511-4D/test-cgt-511/Assets/scripts/Character.cs" Line="1" Column="1" />
+      <File FileName="../Dropbox/CGT511-4D/test-cgt-511/Assets/scripts/Character.cs" Line="25" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,7 +11,9 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="scripts" expanded="True">
-                <Node name="AnimateTexture.cs" selected="True" />
+                <Node name="menu" expanded="True">
+                  <Node name="MainMenuBtns.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>

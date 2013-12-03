@@ -22,12 +22,16 @@ public class HUD : MonoBehaviour {
 	public Texture2D progressBarEmpty;
 	public Texture2D progressBarFull;
 	public Texture2D pauseImage;
+	public Texture snowmanImage;
+	public Texture snowblowerImage;
+	public Texture icecubeImage;
 	
 	/*
 	 * Containers
 	 */ 
 	
 	Rect topContainer = new Rect(-10, -10, 640, 60);
+	Rect leftContainer = new Rect(-10, 100, 150, 800);
 	Rect snowContainer = new Rect (10, 20, 120, 40);
 	Rect shovelContainer = new Rect (138, 20, 90, 40);
 	static Rect progressBarContainer = new Rect (250, 25, 250, 50);
@@ -50,6 +54,29 @@ public class HUD : MonoBehaviour {
 			float yScale = 0.9f;
 			
 			GUI.matrix = Matrix4x4.TRS(new Vector3(50,0,0),Quaternion.identity,new Vector3(yScale, yScale, 1f));
+			
+			GUI.BeginGroup(leftContainer,"");
+				GUI.Box (new Rect(10,10,150,500), "");
+				//snowblower
+				
+				if(GUI.Button(new Rect(30, 50, 100, 100), "")){
+					GameGrid.setActionType(1);
+				}
+				GUI.DrawTexture(new Rect(10,20,150,150), snowblowerImage);
+				//snowman
+				if(GUI.Button(new Rect(30, 150, 100, 100), "")){
+					GameGrid.setActionType(2);
+				}
+				GUI.DrawTexture(new Rect(10,120,150,150), snowmanImage);
+				//icecube
+				if(GUI.Button(new Rect(30, 250, 100, 100), "")){
+					GameGrid.setActionType(3);
+				}
+				GUI.DrawTexture(new Rect(10,220,150,150), icecubeImage);	
+			
+				GUI.EndGroup();
+			
+			GUI.EndGroup ();
 			
 			GUI.BeginGroup(topContainer, "");
 			

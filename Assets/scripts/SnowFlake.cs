@@ -36,5 +36,6 @@ public class SnowFlake : MonoBehaviour {
 		_base.SendMessage("collectSnowFlake");
 		AudioSource.PlayClipAtPoint(collectSound, transform.position);
 		Destroy(gameObject);
+		GameGrid.setActionType(0);
 	}
 }

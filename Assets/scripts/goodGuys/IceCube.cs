@@ -8,6 +8,7 @@ public class IceCube : MonoBehaviour {
 	float energyDrainInterval = 1f;
 	GameObject myEnemy;
 	List<GameObject> myEnemies = new List<GameObject>();
+	AnimateTexture sprite;
 	GameObject _base;
 	
 	RaycastHit hit;
@@ -16,16 +17,19 @@ public class IceCube : MonoBehaviour {
 	void Start () {
 		//myEnemies = new List<Transform>();
 		_base = GameObject.FindGameObjectWithTag("base");
-		//_base.SendMessage("buyGoodGuy");
+		_base.SendMessage("buyGoodGuy", 50.0f);
+		sprite = transform.GetComponent<AnimateTexture>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		energy -= 1.0f * Time.deltaTime;
 		if (energy == 0) {
 			myEnemies.ForEach(ResetEnemyMovement);
 			kill();
 		}
+		*/
 	}
 	
 
@@ -35,9 +39,25 @@ public class IceCube : MonoBehaviour {
 			myEnemy = col.gameObject;
 			myEnemies.Add(myEnemy);
 			
+			sprite.fps = 1;
+			
+			DrainEnergy();
+			
 		}
 	}
-
+	
+	void DrainEnergy(){
+		
+		energy -= 1.0f;
+		
+		if(energy <= 0f){
+			
+			myEnemies.ForEach(ResetEnemyMovement);
+			kill();
+		}else{
+			InvokeRepeating("DrainEnergy", energyDrainInterval, energyDrainInterval);
+		}
+	}
 	
 	void ResetEnemyMovement(GameObject gameObject){
 
@@ -47,10 +67,10 @@ public class IceCube : MonoBehaviour {
 	}
 	void OnMouseDown(){
 		
-		if(GameGrid.getActionType() == 0)
+		if(GameGrid.getActionType() == -1)
 			kill();
 		
-		GameGrid.setActionType(1);
+		GameGrid.setActionType(0);
 		
 	}
 	

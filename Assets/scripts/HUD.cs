@@ -25,17 +25,20 @@ public class HUD : MonoBehaviour {
 	public Texture snowmanImage;
 	public Texture snowblowerImage;
 	public Texture icecubeImage;
+	public Texture shovelImage;
 	
 	/*
 	 * Containers
 	 */ 
 	
-	Rect topContainer = new Rect(-10, -10, 640, 60);
-	Rect leftContainer = new Rect(-10, 100, 150, 800);
+	Rect topContainer = new Rect(0, -10, 640, 60);
+	Rect leftContainer = new Rect(-10, 50, 150, 800);
 	Rect snowContainer = new Rect (10, 20, 120, 40);
 	Rect shovelContainer = new Rect (138, 20, 90, 40);
 	static Rect progressBarContainer = new Rect (250, 25, 250, 50);
 	Rect menuButtonContainer = new Rect (540, 20, 90, 40);
+	
+	Rect menuContainer = new Rect(10, 10, Screen.width-20, Screen.height-20);
 	
 	void Start () {
 		//GUI.skin = skin;
@@ -56,25 +59,25 @@ public class HUD : MonoBehaviour {
 			GUI.matrix = Matrix4x4.TRS(new Vector3(50,0,0),Quaternion.identity,new Vector3(yScale, yScale, 1f));
 			
 			GUI.BeginGroup(leftContainer,"");
-				GUI.Box (new Rect(10,10,150,500), "");
+				//GUI.Box (new Rect(10,10,150,500), "");
+			
 				//snowblower
-				
-				if(GUI.Button(new Rect(30, 50, 100, 100), "")){
+				if(GUI.Button(new Rect(30, 50, 64, 64), "")){
 					GameGrid.setActionType(1);
 				}
-				GUI.DrawTexture(new Rect(10,20,150,150), snowblowerImage);
+				GUI.DrawTexture(new Rect(30,50,64,64), snowblowerImage);
+			
 				//snowman
-				if(GUI.Button(new Rect(30, 150, 100, 100), "")){
+				if(GUI.Button(new Rect(30, 114, 64, 64), "")){
 					GameGrid.setActionType(2);
 				}
-				GUI.DrawTexture(new Rect(10,120,150,150), snowmanImage);
+				GUI.DrawTexture(new Rect(45,114,64,64), snowmanImage);
+			
 				//icecube
-				if(GUI.Button(new Rect(30, 250, 100, 100), "")){
+				if(GUI.Button(new Rect(30, 178, 64, 64), "")){
 					GameGrid.setActionType(3);
 				}
-				GUI.DrawTexture(new Rect(10,220,150,150), icecubeImage);	
-			
-				GUI.EndGroup();
+				GUI.DrawTexture(new Rect(30,178,64,64), icecubeImage);	
 			
 			GUI.EndGroup ();
 			
@@ -96,9 +99,10 @@ public class HUD : MonoBehaviour {
 				
 				GUI.BeginGroup(shovelContainer, "");
 					GUI.Box (new Rect(5, 5, 85, 35), "");
-					if(GUI.Button(new Rect(15, 8, 60, 28), "shovel")){
-						GameGrid.setActionType(0);
+					if(GUI.Button(new Rect(5, 5, 85, 35), "")){
+						GameGrid.setActionType(-1);
 					}
+					GUI.DrawTexture(new Rect(10, -12, 64,64), shovelImage);
 				GUI.EndGroup();
 				
 				/*
@@ -121,19 +125,22 @@ public class HUD : MonoBehaviour {
 				 * Menu button
 				 */
 				GUI.BeginGroup(menuButtonContainer, "");
-					GUI.Box (new Rect(5, 5, 85, 35), "");
-					if(GUI.Button(new Rect(15, 8, 60, 28), pauseImage)){
+					GUI.Box (new Rect(5, 5, 60, 35), "");
+					if(GUI.Button(new Rect(5, 5, 60, 35),"")){
 						if(Time.timeScale == 1.0f){
-							Time.timeScale = 0f;
-							gameIsPaused = true;
+							gamePause();
 						}else{
-							Time.timeScale = 1.0f;
-							gameIsPaused = false;
+							gameResume();
 						}
 					}
+					GUI.DrawTexture(new Rect(20, 8, 32, 32), pauseImage);
 				GUI.EndGroup();
 			
 			GUI.EndGroup();
+			
+			if(gameIsPaused){
+				menuContainer = GUI.ModalWindow(0, menuContainer, menuWindow, "Paused !");
+			}
 			
 		}
 		
@@ -147,6 +154,20 @@ public class HUD : MonoBehaviour {
 		}
 		
 	}
+	
+	public void menuWindow(int windowID) {
+        if (GUI.Button(new Rect(menuContainer.width/2-70, 100, 140, 70), "Resume")){
+			gameResume();
+		}
+		
+		if (GUI.Button(new Rect(menuContainer.width/2-70, 200, 140, 70), "New Game")){
+			
+		}
+		
+		if (GUI.Button(new Rect(menuContainer.width/2-70, 300, 140, 70), "Quit")){
+			quitGame();
+		}
+    }
 	
 	void updateSnowFlakeCount(float flakesCount){
 		snowFlakesCount = flakesCount;
@@ -162,6 +183,22 @@ public class HUD : MonoBehaviour {
 		finalProgress = ( progressBarContainer.x * gameProgress[1] ) / gameProgress[0];
 		progressBarUpdateLock = true;
 		
+	}
+	
+	void gamePause(){
+		Time.timeScale = 0f;
+		gameIsPaused = true;
+		audio.Pause();
+	}
+	
+	void gameResume(){
+		Time.timeScale = 1.0f;
+		gameIsPaused = false;
+		audio.Play();
+	}
+	
+	void quitGame(){
+		Application.LoadLevel("MainMenu");
 	}
 	
 }

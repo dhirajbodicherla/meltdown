@@ -5,6 +5,7 @@ public class Engine : MonoBehaviour {
 
 	public static int currentLevel = 0;
 	GameObject _base;
+	public GUITexture gameOver;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,8 +17,10 @@ public class Engine : MonoBehaviour {
 		
 	}
 	
-	void gameEnd(){
-		Application.LoadLevel("MainMenu");
+	public void gameEnd(){
+		//Application.LoadLevel("MainMenu");
+		//Instantiate(gameOver);
+		gameOver.enabled = true;
 	}
 	
 	public void proceedToNextLevel(){

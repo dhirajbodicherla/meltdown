@@ -16,37 +16,50 @@ public class Tile : MonoBehaviour {
 	void Update () {
 		
 	}
-	void GoodGuySpawn(int actionType) {
-		
-		GameGrid.setActionType(1);
-		
-		if(actionType == 1){
-			
-			if(transform.childCount > 0 )
-				return;
-			
-			if(Game.totalMoney < 100.0f)
-				return;
-			
-			GameObject goodGuy = Instantiate(Resources.Load("GoodGuy")) as GameObject;
-	        goodGuy.transform.position = new Vector3(gameObject.transform.position.x, 
-													0.85f, 
-													gameObject.transform.position.z);
-			goodGuy.transform.parent = transform;
-			goodGuy.name = "GoodGuy";
-			
-		}else{
-			
-			if(transform.childCount < 1 )
-				return;
-			
-			Destroy(transform.GetChild(0).gameObject);
-			
-		}
-		
-		
 	
+	void GoodGuySpawn(int actionType){
+		
+        GameGrid.setActionType(0); // this will update the action type which is defined in another class (GameGrid)
+    
+    	//the if will still be the value receieved by GoodGuySpawn(int actionType)
+    
+        if(actionType == -1){
+    
+            if(transform.childCount < 1 )
+            return;
+        
+            Destroy(transform.GetChild(0).gameObject);
+        
+        }else if(actionType != 0){
+    
+            switch(actionType){
+                case 1:
+					GoodGuy(50.0f, "Snowblower");
+                    break;
+                case 2:
+					GoodGuy(100.0f, "Snowman");
+                    break;
+                case 3:
+					GoodGuy(50.0f, "IceCube");
+                    break;
+            }
+        }               
+    }
+	
+	public void GoodGuy(float cost, string goodguy){
+		
+		if(Game.totalMoney < cost)
+			return;
+		
+		GameObject gg = Instantiate(Resources.Load("goodGuys/" + goodguy)) as GameObject;
+        gg.transform.position = new Vector3(gameObject.transform.position.x, 
+                                                0.85f, 
+                                                gameObject.transform.position.z);
+        gg.transform.parent = transform;
+        gg.name = goodguy;
+        
 	}
+	
 	public void EnemySpawn(int type){
 	
 		switch(type){

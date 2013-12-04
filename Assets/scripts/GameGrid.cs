@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameGrid : MonoBehaviour {
 	
-	private static int actionType = 1; // 1 - spawn good guy, 0 - delete good guy
+	private static int actionType = 0; // 1 - spawn good guy, 0 - delete good guy
 		
 	// Use this for initialization
 	void Start () {

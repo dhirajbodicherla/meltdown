@@ -13,7 +13,6 @@ public class Game : MonoBehaviour {
 	int enemySpawnCount;
 	int totalEnemiesForLevel;
 	public static float totalMoney;
-	//string sceneName;
 	float snowflakeSpawnInterval = 7.0f;
 	private HUD hud;
 	private Engine engine;
@@ -64,8 +63,8 @@ public class Game : MonoBehaviour {
 		tiles[Random.Range(1,tilesCount)].SendMessage("SnowFlakeSpawn");
 	}
 	
-	public void buyGoodGuy(){
-		totalMoney -= 100.0f;
+	public void buyGoodGuy(float cost){
+		totalMoney -= cost;
 		updateHUD();
 	}
 	

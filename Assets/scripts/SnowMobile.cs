@@ -25,6 +25,6 @@ public class SnowMobile : MonoBehaviour {
 		}
 	}
 	void OnMouseDown(){
-		destory = true;
+		//destory = true;
 	}
 }

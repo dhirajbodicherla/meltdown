@@ -6,10 +6,15 @@ public class Engine : MonoBehaviour {
 	public static int currentLevel = 0;
 	GameObject _base;
 	public GUITexture gameOver;
+	public GUITexture gameWinTexture;
+	private HUD hud;
+	private Game game;
 	
 	// Use this for initialization
 	void Start () {
 		_base = GameObject.FindGameObjectWithTag("base");
+		hud = transform.GetComponentInChildren<HUD>();
+		game = transform.GetComponentInChildren<Game>();
 	}
 	
 	// Update is called once per frame
@@ -18,16 +23,36 @@ public class Engine : MonoBehaviour {
 	}
 	
 	public void gameEnd(){
-		//Application.LoadLevel("MainMenu");
-		//Instantiate(gameOver);
-		gameOver.enabled = true;
+		audio.Stop();
+		//gameOver.enabled = true;
+		Instantiate(gameOver);
+		hud.SendMessage("stopGameHUD");
+		game.SendMessage("stopGame");
 	}
 	
 	public void proceedToNextLevel(){
-		print("proceed called in engine " + currentLevel);
 		currentLevel++;
+		if(Levels.levels.Length < currentLevel+1){
+			//gameWin();
+			StartCoroutine("gameWin");
+			return;
+		}
+			
 		PlayerPrefs.SetInt("currentLevel", currentLevel);
-		print ("curr: " + currentLevel + " :: " + Levels.levels[currentLevel].getSceneName());
 		Application.LoadLevel(Levels.levels[currentLevel].getSceneName());
+		
 	}
+	public IEnumerator gameWin(){
+		audio.Stop();
+		Instantiate(gameWinTexture);
+		hud.SendMessage("stopGameHUD");
+		game.SendMessage("stopGame");
+		
+		yield return new WaitForSeconds(10.0f);
+		
+		PlayerPrefs.SetInt("currentLevel", 0);
+		Application.LoadLevel(0);
+		
+	}
+	
 }

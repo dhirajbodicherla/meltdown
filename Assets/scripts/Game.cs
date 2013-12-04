@@ -8,6 +8,7 @@ public class Game : MonoBehaviour {
 	int[] enemies;
 	int tilesCount;
 	bool gameStart = false;
+	bool gameEnd = false;
 	float enemySpawnInterval = 20.0f;
 	int enemyDeadCount;
 	int enemySpawnCount;
@@ -29,6 +30,10 @@ public class Game : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if(gameEnd){
+			return;
+		}
 		
 		if(!gameStart)
 			return;
@@ -82,6 +87,9 @@ public class Game : MonoBehaviour {
 	
 	void gameBegin(){
 		
+		//print ("will begin");
+		//print (enemySpawnInterval + " : " +snowflakeSpawnInterval);
+		
 		//print("enemySpawnCount before level loads: " + enemySpawnCount);
 		level = Levels.levels[PlayerPrefs.GetInt("currentLevel")];
 		
@@ -97,6 +105,7 @@ public class Game : MonoBehaviour {
 		updateHUD();
 		
 		gameStart = true;
+		gameEnd = false;
 	}
 	
 	void updateHUD(){
@@ -113,5 +122,9 @@ public class Game : MonoBehaviour {
 		
 		hud.SendMessage("updateProgressBar", new float[]{totalEnemiesForLevel, enemySpawnCount});
 		
+	}
+	
+	public void stopGame(){
+		gameEnd = true;
 	}
 }

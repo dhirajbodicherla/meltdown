@@ -4,6 +4,7 @@ using System.Collections;
 public class HUD : MonoBehaviour {
 
 	public GUISkin skin;
+	GUIStyle leftHUDStyle = new GUIStyle();
 	
 	static int HUDType = 1; // 1 - top and left, 2- something else
 	
@@ -32,7 +33,7 @@ public class HUD : MonoBehaviour {
 	 */ 
 	
 	Rect topContainer = new Rect(0, -10, 640, 60);
-	Rect leftContainer = new Rect(-10, 50, 150, 800);
+	Rect leftContainer = new Rect(-15, 50,120, 800);
 	Rect snowContainer = new Rect (10, 20, 120, 40);
 	Rect shovelContainer = new Rect (138, 20, 90, 40);
 	static Rect progressBarContainer = new Rect (250, 25, 250, 50);
@@ -42,6 +43,8 @@ public class HUD : MonoBehaviour {
 	
 	void Start () {
 		//GUI.skin = skin;
+		leftHUDStyle.fontSize = 22;
+		leftHUDStyle.normal.textColor = new Color(1,1,1,1);
 	}
 	
 	void OnGUI(){
@@ -56,28 +59,31 @@ public class HUD : MonoBehaviour {
 			
 			float yScale = 0.9f;
 			
-			GUI.matrix = Matrix4x4.TRS(new Vector3(50,0,0),Quaternion.identity,new Vector3(yScale, yScale, 1f));
+			GUI.matrix = Matrix4x4.TRS(new Vector3(20,0,0),Quaternion.identity,new Vector3(yScale, yScale, 1f));
 			
 			GUI.BeginGroup(leftContainer,"");
 				//GUI.Box (new Rect(10,10,150,500), "");
 			
 				//snowblower
-				if(GUI.Button(new Rect(30, 50, 64, 64), "")){
+				if(GUI.Button(new Rect(30, 50, 84, 64), "")){
 					GameGrid.setActionType(1);
 				}
 				GUI.DrawTexture(new Rect(30,50,64,64), snowblowerImage);
+				GUI.Label(new Rect(88, 50, 64, 64), "50", leftHUDStyle);
 			
 				//snowman
-				if(GUI.Button(new Rect(30, 114, 64, 64), "")){
+				if(GUI.Button(new Rect(30, 114, 84, 64), "")){
 					GameGrid.setActionType(2);
 				}
 				GUI.DrawTexture(new Rect(45,114,64,64), snowmanImage);
+				GUI.Label(new Rect(84, 114, 64, 64), "100", leftHUDStyle);
 			
 				//icecube
-				if(GUI.Button(new Rect(30, 178, 64, 64), "")){
+				if(GUI.Button(new Rect(30, 178, 84, 64), "")){
 					GameGrid.setActionType(3);
 				}
-				GUI.DrawTexture(new Rect(30,178,64,64), icecubeImage);	
+				GUI.DrawTexture(new Rect(30,178,64,64), icecubeImage);
+				GUI.Label(new Rect(88, 178, 64, 64), "50", leftHUDStyle);
 			
 			GUI.EndGroup ();
 			
@@ -90,7 +96,7 @@ public class HUD : MonoBehaviour {
 				GUI.BeginGroup(snowContainer, "");
 					GUI.Box (new Rect(5,5,110,35), "");
 					GUI.DrawTexture(new Rect(-5,-1,48,48), snowFlakeImage);
-					GUI.Label(new Rect(50,1,60,48), snowFlakesCount + "");
+					GUI.Label(new Rect(55,3,60,48), snowFlakesCount + "");
 				GUI.EndGroup();
 				
 				/*
@@ -160,8 +166,9 @@ public class HUD : MonoBehaviour {
 			gameResume();
 		}
 		
-		if (GUI.Button(new Rect(menuContainer.width/2-70, 200, 140, 70), "New Game")){
-			
+		if (GUI.Button(new Rect(menuContainer.width/2-70, 200, 140, 70), "Restart")){
+			quitGame();
+			PlayerPrefs.SetInt("currentLevel", 0);
 		}
 		
 		if (GUI.Button(new Rect(menuContainer.width/2-70, 300, 140, 70), "Quit")){
@@ -178,9 +185,13 @@ public class HUD : MonoBehaviour {
 		progress = 0;
 	}
 	
+	void stopGameHUD(){
+		HUDType = 0;
+	}
+	
 	void updateProgressBar(float[] gameProgress){
 		
-		finalProgress = ( progressBarContainer.x * gameProgress[1] ) / gameProgress[0];
+		finalProgress = ( progressBarContainer.x * gameProgress[1] ) / gameProgress[0] - 25;
 		progressBarUpdateLock = true;
 		
 	}

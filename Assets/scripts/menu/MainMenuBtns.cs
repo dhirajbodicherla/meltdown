@@ -35,11 +35,9 @@ public class MainMenuBtns : MonoBehaviour {
 	
 	void applicationLoader(string tag){
 		
-		print ("tag is " + tag);
-		
-		AudioSource.PlayClipAtPoint(beep, transform.position);
+		//AudioSource.PlayClipAtPoint(beep, transform.position);
 		//yield return new WaitForSeconds(0.35f);
-
+		
 		if(tag == "play"){
 			checkCurrentLevel();
 			Application.LoadLevel(Levels.levels[Engine.currentLevel].getSceneName());
@@ -49,6 +47,7 @@ public class MainMenuBtns : MonoBehaviour {
 			
 		}else if(tag == "quit"){
 			PlayerPrefs.DeleteKey("currentLevel");
+			Application.Quit();
 		}else{
 			
 		}

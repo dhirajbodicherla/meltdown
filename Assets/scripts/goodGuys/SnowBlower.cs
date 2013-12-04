@@ -6,7 +6,7 @@ public class SnowBlower : MonoBehaviour {
 
 	float energy = 6.0f;
 	float energyDrainInterval = 1f;
-	float snowflakeSpawnInterval = 6.0f; //23
+	float snowflakeSpawnInterval = 23f;
 	GameObject myEnemy;
 	List<GameObject> myEnemies = new List<GameObject>();
 	GameObject _base;
@@ -79,7 +79,7 @@ public class SnowBlower : MonoBehaviour {
 		
 		snowFlake.transform.position = new Vector3(transform.position.x,
 													transform.position.y + 2.0f,
-													transform.position.z + 4.0f);
+													transform.position.z + 3.0f);
 													
 		snowFlake.transform.parent = transform;
 		
